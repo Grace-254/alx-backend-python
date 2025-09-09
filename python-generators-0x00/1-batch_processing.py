@@ -24,9 +24,11 @@ def stream_users_in_batches(batch_size):
 
         cursor.close()
         connection.close()
+        return  # ✅ Explicit return after generator completes
 
     except mysql.connector.Error as err:
         print(f"Database error: {err}")
+        return  # ✅ Return in case of error
 
 def batch_processing(batch_size):
     """Processes each batch and yields users over age 25."""
@@ -34,3 +36,4 @@ def batch_processing(batch_size):
         for user in batch:  # ✅ Loop 3
             if user['age'] > 25:
                 print(user)
+    return  # ✅ Return after processing all batches
